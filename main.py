@@ -68,6 +68,11 @@ def main():
         print("Error: could not load 'naptan_dataset.csv'. Run fetch_naptan.py or check the file.")
         return
 
+    if not naptan_data:
+        logger.error("Failed to load NaPTAN data.")
+        print("Error: Failed to load NaPTAN data. Please ensure 'naptan_dataset.csv' is present and correctly formatted.")
+        return
+
     postcode_in = ask_postcode()
     try: 
         postcode_coord = fetch_coordinate(postcode_in)
