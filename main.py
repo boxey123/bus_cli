@@ -60,11 +60,12 @@ def main():
         return
 
     client = BusTrackerClient(primary_key=api_keys["primary"], secondary_key=api_keys["secondary"])
-    naptan_data = load_naptan()
 
-    if not naptan_data:
-        logger.error("Failed to load NaPTAN data.")
-        print("Error: Failed to load NaPTAN data. Please ensure 'naptan_dataset.csv' is present and correctly formatted.")
+    try:
+        naptan_data = load_naptan()
+    except (FileNotFoundError, KeyError) as e:
+        logger.error("Error loading NaPTAN data: %s", e)
+        print("Error: could not load 'naptan_dataset.csv'. Run fetch_naptan.py or check the file.")
         return
 
     postcode_in = ask_postcode()
