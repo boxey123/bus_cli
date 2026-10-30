@@ -1,0 +1,8 @@
+venv/
+.env
+.vscode/
+__pycache__
+bus_app.log
+.DS_Store
+development_scripts/
+backup/
